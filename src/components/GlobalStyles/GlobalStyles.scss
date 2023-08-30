@@ -1,0 +1,37 @@
+/** @format */
+
+@import 'normalize.css';
+@import url('https://use.typekit.net/nko5fvg.css');
+:root {
+  --secondary-color: rgb(0, 158, 0);
+  --primary-color: #fee22c;
+  --default-layout-header-height: 100px;
+  --default-layout-width: 1200px;
+  --default-layout-horizontal-spacer: 24px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+button,
+input {
+  border: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: ibm-plex-sans, sans-serif;
+  font-size: 1.6rem;
+  line-height: 1.5;
+  text-rendering: optimizespeed;
+  background-color: #ececec;
+}

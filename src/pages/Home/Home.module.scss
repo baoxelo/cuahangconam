@@ -1,0 +1,10 @@
+/** @format */
+
+.wrapper {
+  display: flex;
+  width: 1200px;
+  margin-top: 10px;
+}
+.sidebar {
+  width: calc(100% / 6);
+}

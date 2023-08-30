@@ -1,0 +1,28 @@
+/** @format */
+
+.wrapper {
+  width: 400px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.search-input {
+  font-size: 1.6rem;
+  padding-left: 20px;
+  padding-right: 20px;
+  border: 1px solid #ccc;
+  width: 300px;
+  height: 40px;
+  outline: none;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+.search-btn {
+  height: 40px;
+  width: 40px;
+  border: 1px solid #ccc;
+  box-shadow: none;
+  outline: none;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}

@@ -1,0 +1,29 @@
+/** @format */
+
+.form-wrapper {
+  padding: 40px 40px 20px;
+  margin-top: 30px;
+}
+.login-input {
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  font-size: 1.6rem;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.login-btn {
+}
+.switch-toregistry {
+  padding: 0 40px;
+}
+.registry-status {
+  display: inline;
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+.registry-link {
+  color: var(--primary-color);
+  font-size: 1.6rem;
+  font-weight: 400;
+}

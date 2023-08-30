@@ -1,0 +1,27 @@
+/** @format */
+
+.wrapper {
+  background-color: #fff;
+  margin-right: 5px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.header {
+  background-color: var(--secondary-color);
+  padding: 10px 0;
+  text-align: center;
+  h1 {
+    color: #fff;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    margin-bottom: 0;
+  }
+}
+.category-list {
+  padding: 5px 5px 0 20px;
+  list-style-type: none;
+}
+.category-item {
+  font-size: 1.6rem;
+  padding: 3px 0;
+}
