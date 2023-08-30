@@ -1,0 +1,31 @@
+/** @format */
+
+.wrapper {
+  display: block;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: #fff;
+}
+.action-list {
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+}
+.action-item {
+  display: block;
+  cursor: pointer;
+  &:hover {
+    background-color: #ccc;
+  }
+}
+.action-link {
+  display: block;
+  color: #000;
+  font-size: 1.6rem;
+  padding: 8px 15px;
+}
+.logout-btn {
+  background-color: transparent;
+  font-size: 1.6rem;
+  padding: 8px 15px;
+}

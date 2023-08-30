@@ -10,7 +10,6 @@ const publicRoutes = [
   { path: config.routes.home, component: Home },
   { path: config.routes.profile, component: Profile },
   { path: config.routes.cart, component: Cart },
-  { path: config.routes.store, component: Store },
 ];
-const privateRoutes = [];
+const privateRoutes = [{ path: config.routes.store, component: Store }];
 export { publicRoutes, privateRoutes };

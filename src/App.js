@@ -6,12 +6,27 @@ import { publicRoutes } from './routes';
 import DefaultLayout from './layouts/DefaultLayout';
 import * as LoginApi from '~/services/login';
 import * as GetUserApi from '~/services/user';
+import SignUpModal from './components/RegistraionModals/SignUpModal';
+import SignInModal from './components/RegistraionModals/SignInModal';
+import Modal from './components/Modal';
 
 function App() {
   const [userInformation, setUserInformation] = useState({
     fullName: '',
     image: '',
   });
+  const [isModal, setIsModal] = useState(false);
+  const [loginMethod, setLoginMethod] = useState(false);
+
+  const hideModel = () => {
+    setIsModal(false);
+  };
+  const handleShowModal = () => {
+    setIsModal(true);
+  };
+  const showRegistry = () => {
+    setLoginMethod(true);
+  };
 
   const handleLogin = async (e, emailValue, passwordValue) => {
     e.preventDefault();
@@ -20,13 +35,14 @@ function App() {
       password: passwordValue,
     };
     await LoginApi.Login(data);
+    if (localStorage.getItem('token')) setIsModal(false);
     await getUserInformation();
   };
 
   const getUserInformation = async () => {
     if (localStorage.getItem('token')) {
       var user = await GetUserApi.GetUserInformation();
-      console.log(user);
+
       if (user !== undefined) {
         setUserInformation(user);
       } else {
@@ -35,9 +51,18 @@ function App() {
     }
   };
 
+  const onLogout = () => {
+    localStorage.removeItem('token');
+    setUserInformation({
+      fullName: '',
+      image: '',
+    });
+  };
+
   useEffect(() => {
     getUserInformation();
   }, []);
+
   return (
     <Router>
       <div className="App">
@@ -57,7 +82,8 @@ function App() {
                 element={
                   <Layout
                     userInformation={userInformation}
-                    handleLogin={handleLogin}
+                    handleShowModal={handleShowModal}
+                    onLogout={onLogout}
                   >
                     <Page />
                   </Layout>
@@ -66,6 +92,22 @@ function App() {
             );
           })}
         </Routes>
+        {!userInformation.fullName && isModal ? (
+          <Modal hideModel={hideModel}>
+            {' '}
+            {loginMethod ? (
+              <SignUpModal />
+            ) : (
+              <SignInModal
+                hideModel={hideModel}
+                showRegistry={showRegistry}
+                handleLogin={handleLogin}
+              />
+            )}
+          </Modal>
+        ) : (
+          <></>
+        )}
       </div>
     </Router>
   );

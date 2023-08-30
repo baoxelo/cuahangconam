@@ -6,10 +6,19 @@ import Header from '../components/Header';
 
 const cx = classNames.bind(styles);
 
-function DefaultLayout({ children, userInformation, handleLogin }) {
+function DefaultLayout({
+  children,
+  userInformation,
+  handleShowModal,
+  onLogout,
+}) {
   return (
     <div className={cx('wrapper')}>
-      <Header userInformation={userInformation} handleLogin={handleLogin} />
+      <Header
+        userInformation={userInformation}
+        handleShowModal={handleShowModal}
+        onLogout={onLogout}
+      />
       <div className={cx('content')}>{children}</div>
     </div>
   );

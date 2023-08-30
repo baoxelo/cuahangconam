@@ -1,0 +1,28 @@
+/** @format */
+
+.wrapper {
+  display: flex;
+  padding: 10px 20px;
+}
+.product-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+.product-info {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.product-name {
+  font-size: 1.6rem;
+  line-height: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.product-cost {
+  font-size: 1.4rem;
+  line-height: 1.6rem;
+}

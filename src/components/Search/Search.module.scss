@@ -1,9 +1,10 @@
 /** @format */
 
 .wrapper {
-  width: 400px;
+  min-width: 400px;
   height: 100%;
   display: flex;
+  flex: 1;
   align-items: center;
 }
 .search-input {
@@ -11,18 +12,27 @@
   padding-left: 20px;
   padding-right: 20px;
   border: 1px solid #ccc;
-  width: 300px;
-  height: 40px;
+  width: 500px;
+  height: 45px;
   outline: none;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
 }
 .search-btn {
-  height: 40px;
-  width: 40px;
+  height: 45px;
+  width: 45px;
   border: 1px solid #ccc;
   box-shadow: none;
   outline: none;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
+}
+.search-result {
+  background-color: #fff;
+  width: 500px;
+  max-height: 500px;
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 }
