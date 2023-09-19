@@ -3,8 +3,9 @@
 @import 'normalize.css';
 @import url('https://use.typekit.net/nko5fvg.css');
 :root {
-  --secondary-color: rgb(0, 158, 0);
-  --primary-color: #fee22c;
+  --secondary-color: #2a9d8f;
+  --primary-color: #ffb703;
+  --background-color: #023047;
   --default-layout-header-height: 100px;
   --default-layout-width: 1200px;
   --default-layout-horizontal-spacer: 24px;
@@ -19,7 +20,9 @@ button,
 input {
   border: none;
 }
-
+button {
+  background-color: transparent;
+}
 a {
   text-decoration: none;
 }
@@ -34,4 +37,22 @@ body {
   line-height: 1.5;
   text-rendering: optimizespeed;
   background-color: #ececec;
+  overflow-y: overlay;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+html *::-webkit-scrollbar {
+  border-radius: 0;
+  width: 8px;
+}
+html *::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+html *::-webkit-scrollbar-track {
+  border-radius: 0;
+  background-color: #fff;
 }

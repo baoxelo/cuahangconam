@@ -35,6 +35,7 @@ function SignInModal({ showRegistry, handleLogin }) {
           placeholder="Nhập mật khẩu"
           value={passwordValue}
           onChange={onChangePasswordInput}
+          type="password"
         />
         <Button
           onClick={(e) => handleLogin(e, emailValue, passwordValue)}

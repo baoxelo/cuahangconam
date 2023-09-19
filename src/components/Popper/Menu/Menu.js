@@ -12,7 +12,10 @@ function Menu({ onLogout }) {
     <div className={cx('wrapper')}>
       <ul className={cx('action-list')}>
         <li className={cx('action-item')}>
-          <Link to={config.routes.profile} className={cx('action-link')}>
+          <Link
+            to={config.routes.profile + '=user'}
+            className={cx('action-link')}
+          >
             Thông tin cá nhân
           </Link>
         </li>

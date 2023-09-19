@@ -1,17 +1,16 @@
 /** @format */
 
 import * as request from '~/ultil/httpRequest';
-
 export const Login = async (loginData) => {
   try {
     const res = await request.post(`Account/login`, loginData);
-    if (res.data.token) {
-      localStorage.setItem('token', `${res.data.token}`);
-      console.log(localStorage.getItem('token'));
-    } else {
-      return 'invalid';
-    }
+    console.log(res.data);
+    localStorage.setItem('token', res.data.token);
   } catch (error) {
-    console.log('error');
+    if (error.response.data.message) {
+      alert(error.response.data.message);
+    } else {
+      console.log(error);
+    }
   }
 };

@@ -2,11 +2,11 @@
 
 import * as request from '~/ultil/httpRequest';
 
-export const Sidebar = async () => {
+export const Product = async () => {
   try {
-    const res = await request.get(`Category`);
+    const res = await request.get(`Product`);
     return res.data;
   } catch (error) {
-    console.log('error');
+    console.log(error);
   }
 };

@@ -1,44 +1,65 @@
 /** @format */
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Fragment, useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
 
-import { publicRoutes } from './routes';
+import { publicRoutes, privateRoutes } from './routes';
 import DefaultLayout from './layouts/DefaultLayout';
-import * as LoginApi from '~/services/login';
-import * as GetUserApi from '~/services/user';
+import * as LoginApi from '~/services/Account/login';
+import * as GetUserApi from '~/services/Account/getUser';
 import SignUpModal from './components/RegistraionModals/SignUpModal';
 import SignInModal from './components/RegistraionModals/SignInModal';
 import Modal from './components/Modal';
 
 function App() {
-  const [userInformation, setUserInformation] = useState({
-    fullName: '',
-    image: '',
-  });
+  const [userInformation, setUserInformation] = useState({});
   const [isModal, setIsModal] = useState(false);
-  const [loginMethod, setLoginMethod] = useState(false);
+  const [registrationMethod, setRegistrationMethod] = useState(true);
+  const [cookie, setCookie] = useCookies();
 
-  const hideModel = () => {
+  //Hide the modal
+  const hideModal = () => {
     setIsModal(false);
   };
+
+  //Show the modal
   const handleShowModal = () => {
     setIsModal(true);
-  };
-  const showRegistry = () => {
-    setLoginMethod(true);
+    setRegistrationMethod(true);
   };
 
+  //Check role to create private routes
+  const checkRoles = () => {
+    if (userInformation.roles !== undefined) {
+      return userInformation.roles.includes('administrator');
+    }
+    return false;
+  };
+
+  //Login and set the token
   const handleLogin = async (e, emailValue, passwordValue) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     const data = {
       account: emailValue,
       password: passwordValue,
     };
     await LoginApi.Login(data);
+    console.log(cookie);
     if (localStorage.getItem('token')) setIsModal(false);
     await getUserInformation();
   };
 
+  //Logout and remove token
+  const onLogout = () => {
+    localStorage.removeItem('token');
+    setUserInformation({
+      fullName: '',
+      image: '',
+      roles: [],
+    });
+  };
+
+  //Get user information for header bar
   const getUserInformation = async () => {
     if (localStorage.getItem('token')) {
       var user = await GetUserApi.GetUserInformation();
@@ -49,14 +70,6 @@ function App() {
         localStorage.removeItem('token');
       }
     }
-  };
-
-  const onLogout = () => {
-    localStorage.removeItem('token');
-    setUserInformation({
-      fullName: '',
-      image: '',
-    });
   };
 
   useEffect(() => {
@@ -91,17 +104,46 @@ function App() {
               />
             );
           })}
+          {/* private route */}
+          {checkRoles() &&
+            privateRoutes.map((route, index) => {
+              let Layout = DefaultLayout;
+              if (route.layout) {
+                Layout = route.layout;
+              } else if (route.layout === null) {
+                Layout = Fragment;
+              }
+              const Page = route.component;
+              return (
+                <Route
+                  key={index}
+                  path={route.path}
+                  element={
+                    <Layout
+                      userInformation={userInformation}
+                      handleShowModal={handleShowModal}
+                      onLogout={onLogout}
+                    >
+                      <Page />
+                    </Layout>
+                  }
+                />
+              );
+            })}
         </Routes>
-        {!userInformation.fullName && isModal ? (
-          <Modal hideModel={hideModel}>
+        {!localStorage.getItem('token') && isModal ? (
+          <Modal hideModal={hideModal}>
             {' '}
-            {loginMethod ? (
-              <SignUpModal />
-            ) : (
+            {registrationMethod ? (
               <SignInModal
-                hideModel={hideModel}
-                showRegistry={showRegistry}
+                hideModal={hideModal}
+                showRegistry={() => setRegistrationMethod(false)}
                 handleLogin={handleLogin}
+              />
+            ) : (
+              <SignUpModal
+                hideModal={hideModal}
+                showLogin={() => setRegistrationMethod(true)}
               />
             )}
           </Modal>

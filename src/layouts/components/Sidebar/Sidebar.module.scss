@@ -2,6 +2,7 @@
 
 .wrapper {
   background-color: #fff;
+  height: 500px;
   margin-right: 5px;
   border-radius: 4px;
   overflow: hidden;
@@ -18,10 +19,19 @@
   }
 }
 .category-list {
-  padding: 5px 5px 0 20px;
+  padding: 5px;
   list-style-type: none;
 }
 .category-item {
   font-size: 1.6rem;
-  padding: 3px 0;
+  padding: 5px 20px;
+  cursor: pointer;
+  &.active {
+    background-color: #ccc;
+    border-radius: 4px;
+  }
+  h4 {
+    font-size: 1.6rem;
+    margin-bottom: 0;
+  }
 }

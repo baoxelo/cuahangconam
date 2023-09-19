@@ -1,0 +1,53 @@
+/** @format */
+.wrapper {
+  display: flex;
+  align-items: center;
+  height: 80px;
+  padding: 5px 0;
+}
+.item-information {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  margin: 0 30px;
+}
+.item-name {
+  width: 200px;
+  font-size: 1.8rem;
+  margin-bottom: 0;
+}
+.item-price {
+  width: 200px;
+  margin-bottom: 0;
+}
+.item-action {
+  display: flex;
+  width: 100px;
+  justify-content: space-between;
+  align-items: center;
+}
+.item-quantity {
+  width: 50px;
+  font-size: 1.6rem;
+  padding: 0;
+  text-align: center;
+  margin-bottom: 0;
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  &[type='number'] {
+    -moz-appearance: textfield;
+  }
+}
+.item-image {
+  height: 60px;
+  width: 60px;
+  border-radius: 4px;
+  object-fit: cover;
+}

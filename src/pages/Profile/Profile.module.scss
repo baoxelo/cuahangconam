@@ -1,0 +1,68 @@
+/** @format */
+
+.wrapper {
+  display: flex;
+  width: 1200px;
+  margin-top: 10px;
+}
+.sidebar {
+  width: 25%;
+  height: 400px;
+  margin-right: 5px;
+  background-color: #fff;
+  border-radius: 4px;
+}
+.user-avatar {
+  display: flex;
+  align-items: center;
+  height: 80px;
+  width: 100%;
+  padding: 16px;
+  border-bottom: 1px solid #ccc;
+}
+.user-image {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.user-name {
+  padding-left: 24px;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+.action-list {
+  margin-top: 10px;
+}
+.action-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  cursor: pointer;
+  &:hover {
+    color: var(--primary-color);
+  }
+  &.active {
+    color: var(--primary-color);
+  }
+}
+.action-icon {
+  font-size: 1.8rem;
+  width: 20px;
+  margin-right: 12px;
+}
+.action-name {
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 24px;
+  margin-bottom: 0;
+}
+.content {
+  display: block;
+  width: 75%;
+  height: 400px;
+  margin-left: 5px;
+  border-radius: 4px;
+  background-color: #fff;
+}

@@ -1,6 +1,10 @@
 /** @format */
 import { useEffect, useState } from 'react';
-import { faCaretDown, faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCaretDown,
+  faCartShopping,
+  faScrewdriverWrench,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
 import Tippy from '@tippyjs/react/headless';
@@ -12,11 +16,24 @@ import Button from '~/components/Buttons';
 import config from '~/configs';
 import { Link } from 'react-router-dom';
 import Menu from '~/components/Popper/Menu';
-
+import * as GetCartApi from '~/services/Cart/getCart';
 const cx = classNames.bind(styles);
 
 function Header({ userInformation, handleShowModal, onLogout }) {
-  useEffect(() => {}, []);
+  const [cart, setCart] = useState([]);
+  const checkRoles = () => {
+    if (userInformation.roles !== undefined) {
+      return userInformation.roles.includes('administrator');
+    }
+    return false;
+  };
+  //Fetch Api for cart
+  const fetchCart = async () => {
+    setCart(await GetCartApi.GetCart());
+  };
+  useEffect(() => {
+    fetchCart();
+  }, []);
   return (
     <header className={cx('wrapper')}>
       <div className={cx('container')}>
@@ -33,21 +50,72 @@ function Header({ userInformation, handleShowModal, onLogout }) {
         </div>
 
         <div className={cx('user-wrapper')}>
-          <Button
-            rightIcon={<FontAwesomeIcon icon={faCartShopping} />}
-            outline={true}
-            to={config.routes.cart}
-          >
-            Giỏ hàng
-          </Button>
+          {checkRoles() ? (
+            <Button
+              rightIcon={<FontAwesomeIcon icon={faScrewdriverWrench} />}
+              outline={true}
+              to={config.routes.store}
+            >
+              Admin
+            </Button>
+          ) : (
+            <Tippy
+              onShow={fetchCart}
+              delay={[0, 500]}
+              placement="bottom"
+              render={(attrs) => {
+                if (cart.length > 0) {
+                  return (
+                    <div attrs={attrs} className={cx('cart-wrapper')}>
+                      <div className={cx('cart-container')}>
+                        {cart.map((item, index) => (
+                          <div key={index} className={cx('cart-item-wrapper')}>
+                            <img
+                              className={cx('cart-item-image')}
+                              src={item.image}
+                              alt="productimage"
+                            />
+                            <div className={cx('cart-item-info')}>
+                              <h4 className={cx('cart-item-title')}>
+                                {item.name}
+                              </h4>
+                              <div className={cx('cart-item-content')}>
+                                <h4 className={cx('cart-item-quantity')}>
+                                  Số lượng : {item.quantity} lạng
+                                </h4>
+                                <h4 className={cx('cart-item-price')}>
+                                  Giá: {item.price} đ
+                                </h4>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                }
+              }}
+            >
+              <Button
+                to={
+                  localStorage.getItem('token') &&
+                  config.routes.profile + '=cart'
+                }
+                className={cx('cart-btn')}
+              >
+                <FontAwesomeIcon icon={faCartShopping} />
+              </Button>
+            </Tippy>
+          )}
 
-          {userInformation.fullName !== '' ? (
+          {localStorage.getItem('token') &&
+          userInformation.fullName !== undefined ? (
             <Tippy
               interactive
+              placement="bottom"
               delay={[0, 700]}
               offset={[12, 8]}
               render={(attrs) => <Menu attrs={attrs} onLogout={onLogout} />}
-              placement="bottom"
               hideOnClick={true}
             >
               <Button
@@ -62,7 +130,7 @@ function Header({ userInformation, handleShowModal, onLogout }) {
                 rightIcon={
                   <FontAwesomeIcon
                     icon={faCaretDown}
-                    style={{ fontSize: '2rem', marginBottom: 4 }}
+                    style={{ fontSize: '2rem', marginBottom: 4, color: '#ddd' }}
                   />
                 }
               >

@@ -7,6 +7,6 @@ export const Search = async (data) => {
     const res = await request.get(`/Product/Search=${data}`);
     return res.data;
   } catch (error) {
-    console.log('error');
+    console.log(error);
   }
 };

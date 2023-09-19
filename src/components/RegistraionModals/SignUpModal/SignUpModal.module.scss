@@ -1,0 +1,24 @@
+/** @format */
+
+.wrapper {
+  position: relative;
+  display: block;
+  height: 100%;
+  padding: 30px 30px 10px 30px;
+}
+.label {
+  margin-top: 10px;
+  font-size: 1.4rem;
+}
+.input {
+  font-size: 1.4rem;
+  padding: 3px 10px;
+}
+.submit-btn {
+  position: absolute;
+  font-size: 1.6rem;
+  bottom: 30px;
+  right: 30px;
+  background-color: var(--secondary-color);
+  padding: 7px 20px;
+}

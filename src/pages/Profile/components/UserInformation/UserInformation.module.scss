@@ -1,0 +1,40 @@
+/** @format */
+
+.wrapper {
+}
+.header {
+  padding: 16px 24px;
+  font-size: 2.4rem;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+.content {
+  padding: 16px 24px;
+  margin-bottom: 0;
+  list-style-type: none;
+}
+.info-line {
+  margin-bottom: 16px;
+}
+.info-label {
+  width: 150px;
+  text-align: right;
+  font-size: 16px;
+  line-height: 24px;
+}
+.info-input {
+  font-size: 16px;
+  line-height: 16px;
+  width: 360px;
+  padding: 5px 16px;
+  margin-left: 32px;
+  outline: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.submit-btn {
+  display: block;
+  border: none;
+  margin-left: 180px;
+  height: 50px;
+}

@@ -15,7 +15,7 @@ function ProductItem({ data }) {
       />
       <div className={cx('product-info')}>
         <h4 className={cx('product-name')}>{data.name}</h4>
-        <span className={cx('product-cost')}>Giá: {data.cost} / kg</span>
+        <span className={cx('product-cost')}>Giá: {data.cost} / lạng</span>
       </div>
     </div>
   );

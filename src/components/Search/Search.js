@@ -1,14 +1,18 @@
 /** @format */
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Tippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
 
 import styles from './Search.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCircleXmark,
+  faMagnifyingGlass,
+  faSpinner,
+} from '@fortawesome/free-solid-svg-icons';
 import useDebounce from '~/hooks/useDebounce';
-import * as SearchApi from '~/services/search';
+import * as SearchApi from '~/services/Search/search';
 import ProductItem from '../ProductItem/ProductItem';
 
 const cx = classNames.bind(styles);
@@ -21,6 +25,7 @@ function Search() {
 
   const debouncedValue = useDebounce(searchValue, 1000);
 
+  const inputRef = useRef();
   const handleHideResult = () => {};
 
   const onChangeInput = (e) => {
@@ -30,6 +35,13 @@ function Search() {
     }
   };
   const handleSearch = () => {};
+
+  const handleClear = () => {
+    setSearchValue('');
+    setSearchResult([]);
+    inputRef.current.focus();
+  };
+
   useEffect(() => {
     if (!debouncedValue.trim()) {
       setSearchResult([]);
@@ -50,14 +62,24 @@ function Search() {
   return (
     <Tippy
       interactive
-      visible={true} //{searchResult.length > 0 && showResult}
-      render={(attrs) => (
-        <div className={cx('search-result')} {...attrs}>
-          {searchResult.map((result, index) => (
-            <ProductItem key={index} data={result} />
-          ))}
-        </div>
-      )}
+      visible={searchResult.length > 0 && showResult}
+      render={(attrs) => {
+        if (searchResult && searchValue !== '' && showResult) {
+          return (
+            <div className={cx('search-result-wrapper')} {...attrs}>
+              <h4 className={cx('search-result-title')}>Kết quả tìm kiếm</h4>
+              <div className={cx('search-result-list')}>
+                {searchResult.map((result, index) => (
+                  <div className={cx('search-result-item')}>
+                    <ProductItem key={index} data={result} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        }
+      }}
+      placement="bottom-start"
       onClickOutside={handleHideResult}
     >
       <div className={cx('wrapper')}>
@@ -66,7 +88,20 @@ function Search() {
           value={searchValue}
           onChange={onChangeInput}
           placeholder="Tìm kiếm sản phẩm tại đây"
+          ref={inputRef}
+          spellCheck={false}
+          onFocus={() => setShowResult(true)}
+          onBlur={() => setShowResult(false)}
         />
+        {!!searchValue && !loading && (
+          <button className={cx('clear')} onClick={handleClear}>
+            <FontAwesomeIcon icon={faCircleXmark} />
+          </button>
+        )}
+        {loading && (
+          <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />
+        )}
+
         <button onClick={handleSearch} className={cx('search-btn')}>
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </button>
