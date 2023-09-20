@@ -10,6 +10,7 @@ import * as GetUserApi from '~/services/Account/getUser';
 import SignUpModal from './components/RegistraionModals/SignUpModal';
 import SignInModal from './components/RegistraionModals/SignInModal';
 import Modal from './components/Modal';
+import axios from 'axios';
 
 function App() {
   const [userInformation, setUserInformation] = useState({});
@@ -46,7 +47,6 @@ function App() {
     await LoginApi.Login(data);
     console.log(cookie);
     if (localStorage.getItem('token')) setIsModal(false);
-    await getUserInformation();
   };
 
   //Logout and remove token
@@ -61,20 +61,14 @@ function App() {
 
   //Get user information for header bar
   const getUserInformation = async () => {
-    if (localStorage.getItem('token')) {
-      var user = await GetUserApi.GetUserInformation();
-
-      if (user !== undefined) {
-        setUserInformation(user);
-      } else {
-        localStorage.removeItem('token');
-      }
-    }
+    var response = await axios.get(
+      'https://localhost:7153/api/Account/UserInformation',
+      { withCredentials: true }
+    );
+    console.log(response);
   };
 
-  useEffect(() => {
-    getUserInformation();
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <Router>
@@ -131,7 +125,7 @@ function App() {
               );
             })}
         </Routes>
-        {!localStorage.getItem('token') && isModal ? (
+        {userInformation.full === undefined && isModal ? (
           <Modal hideModal={hideModal}>
             {' '}
             {registrationMethod ? (

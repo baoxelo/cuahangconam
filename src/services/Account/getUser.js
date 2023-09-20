@@ -3,11 +3,10 @@
 import * as request from '~/ultil/httpRequest';
 
 export const GetUserInformation = async () => {
-  const config = {
-    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-  };
   try {
-    const res = await request.authGet(`Account/UserInformation`, config);
+    const res = await request.authGet(`Account/UserInformation`, {
+      withCredentials: true,
+    });
 
     return res.data;
   } catch (error) {
