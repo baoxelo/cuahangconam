@@ -3,11 +3,8 @@
 import * as request from '~/ultil/httpRequest';
 
 export const GetAllUsers = async () => {
-  const config = {
-    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-  };
   try {
-    const res = await request.authGet(`AdminAccount/GetAllUsers`, config);
+    const res = await request.authGet(`Admin/GetAllUsers`);
 
     return res.data;
   } catch (error) {

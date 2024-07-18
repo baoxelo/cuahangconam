@@ -3,35 +3,36 @@ import classNames from 'classnames/bind';
 import { memo, useEffect, useState } from 'react';
 
 import styles from './Home.module.scss';
-import ProductList from '~/layouts/components/ProductList';
+import FilmList from '~/layouts/components/FilmList';
 import Sidebar from '~/layouts/components/Sidebar';
-import * as ProductApi from '~/services/Products/product';
-import * as CategoryApi from '~/services/Category/getCategory';
+import * as FilmApi from '~/services/Films/film';
+import * as GenreApi from '~/services/Genre/getGenre';
 const cx = classNames.bind(styles);
 
 function Home() {
-  const [productList, setProductList] = useState([]);
+  const [filmList, setFilmList] = useState([]);
 
   const handleSidebar = async (id) => {
     if (id === 0) {
-      await initProduct();
+      await initFilm();
       return;
     }
-    var response = await CategoryApi.Category(id);
-    setProductList(response.data.products);
+    var response = await GenreApi.Genre(id);
+    setFilmList(response.data.films);
   };
   useEffect(() => {
-    initProduct();
+    initFilm();
   }, []);
 
-  const initProduct = async () => {
-    setProductList(await ProductApi.Product());
+  const initFilm = async () => {
+    var films = await FilmApi.Film()
+    setFilmList(films);
   };
 
   return (
     <div className={cx('wrapper')}>
       <Sidebar className={cx('sidebar')} handleSidebar={handleSidebar} />
-      <ProductList data={productList} />
+      <FilmList data={filmList} />
     </div>
   );
 }

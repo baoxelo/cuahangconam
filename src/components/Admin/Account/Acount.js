@@ -17,7 +17,8 @@ function Account() {
   }, []);
 
   const fetchAccounts = async () => {
-    setUsers(await GetAllUserApi.GetAllUsers());
+    const response = await GetAllUserApi.GetAllUsers();
+    setUsers(response);
   };
   return (
     <div className={cx('wrapper')}>

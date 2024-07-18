@@ -23,13 +23,13 @@ function Profile() {
   const [userInformation, setUserInformation] = useState({});
   const [sidebar, setSidebar] = useState(page);
   const getUserInformation = async () => {
-    if (localStorage.getItem('token')) {
+    if (localStorage.getItem('login')) {
       var user = await GetUserApi.GetUserInformation();
 
       if (user !== undefined) {
         setUserInformation(user);
       } else {
-        localStorage.removeItem('token');
+        localStorage.removeItem('login');
       }
     }
   };

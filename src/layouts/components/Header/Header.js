@@ -21,6 +21,8 @@ const cx = classNames.bind(styles);
 
 function Header({ userInformation, handleShowModal, onLogout }) {
   const [cart, setCart] = useState([]);
+  const [visibleCart, setVisibleCart] = useState(false);
+
   const checkRoles = () => {
     if (userInformation.roles !== undefined) {
       return userInformation.roles.includes('administrator');
@@ -29,11 +31,15 @@ function Header({ userInformation, handleShowModal, onLogout }) {
   };
   //Fetch Api for cart
   const fetchCart = async () => {
-    setCart(await GetCartApi.GetCart());
+    console.log(123);
+    const response = await GetCartApi.GetCart();
+    if (response) {
+      setCart(await GetCartApi.GetCart());
+      setVisibleCart(true);
+    } else {
+      setVisibleCart(false);
+    }
   };
-  useEffect(() => {
-    fetchCart();
-  }, []);
   return (
     <header className={cx('wrapper')}>
       <div className={cx('container')}>
@@ -60,11 +66,13 @@ function Header({ userInformation, handleShowModal, onLogout }) {
             </Button>
           ) : (
             <Tippy
-              onShow={fetchCart}
+              interactive
+              onShow={() => fetchCart()}
               delay={[0, 500]}
               placement="bottom"
+              appendTo={document.body}
               render={(attrs) => {
-                if (cart.length > 0) {
+                if (visibleCart) {
                   return (
                     <div attrs={attrs} className={cx('cart-wrapper')}>
                       <div className={cx('cart-container')}>
@@ -73,7 +81,7 @@ function Header({ userInformation, handleShowModal, onLogout }) {
                             <img
                               className={cx('cart-item-image')}
                               src={item.image}
-                              alt="productimage"
+                              alt="filmimage"
                             />
                             <div className={cx('cart-item-info')}>
                               <h4 className={cx('cart-item-title')}>
@@ -98,7 +106,7 @@ function Header({ userInformation, handleShowModal, onLogout }) {
             >
               <Button
                 to={
-                  localStorage.getItem('token') &&
+                  localStorage.getItem('login') &&
                   config.routes.profile + '=cart'
                 }
                 className={cx('cart-btn')}
@@ -108,8 +116,7 @@ function Header({ userInformation, handleShowModal, onLogout }) {
             </Tippy>
           )}
 
-          {localStorage.getItem('token') &&
-          userInformation.fullName !== undefined ? (
+          {userInformation.fullName !== undefined ? (
             <Tippy
               interactive
               placement="bottom"

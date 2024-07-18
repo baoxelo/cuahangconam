@@ -129,7 +129,9 @@ function SignUpModal({ hideModal, showLogin, handleLogin }) {
           </Form>
         )}
       </Formik>
-      <button onClick={showLogin}>Đi đến trang đăng nhập</button>
+      <button className={cx('route-btn')} onClick={showLogin}>
+        Đi đến trang đăng nhập
+      </button>
     </div>
   );
 }

@@ -3,108 +3,116 @@ import classNames from 'classnames/bind';
 import { useState } from 'react';
 
 import styles from './Store.module.scss';
-import AdminProduct from '~/components/Admin/Product';
-import AdminCategory from '~/components/Admin/Category';
+import AdminFilm from '~/components/Admin/Film';
+import AdminGenre from '~/components/Admin/Genre';
 import Account from '~/components/Admin/Account';
+import Invoice from '~/components/Admin/Invoice';
+import Income from '~/components/Admin/Income';
 
 const cx = classNames.bind(styles);
 
 function Store() {
-  const [category, setCategory] = useState('product');
+  const [genre, setGenre] = useState('film');
   const renderBody = () => {
-    switch (category) {
-      case 'product':
-        return <AdminProduct />;
+    switch (genre) {
+      case 'film':
+        return <AdminFilm />;
+      case 'genre':
+        return <AdminGenre />;
       case 'account':
         return <Account />;
-      case 'category':
-        return <AdminCategory />;
+      case 'login':
+        return <></>;
+      case 'order':
+        return <Invoice />;
+      case 'income':
+        return <Income />;
       default:
-        return <AdminProduct />;
+        return <AdminFilm />;
     }
   };
   return (
     <div className={cx('wrapper')}>
       <div className={cx('container')}>
         <div className={cx('sidebar')}>
-          <ul className={cx('category-list')}>
-            <li className={cx('category-item')}>
-              <h1 className={cx('category-title')}>Sản phẩm</h1>
+          <ul className={cx('genre-list')}>
+            <li className={cx('genre-item')}>
+              <h1 className={cx('genre-title')}>Sản phẩm</h1>
               <span
-                className={cx('category-action', {
-                  active: category === 'product',
+                className={cx('genre-action', {
+                  active: genre === 'film',
                 })}
                 onClick={() => {
-                  setCategory('product');
+                  setGenre('film');
                 }}
               >
-                <h4 className={cx('category-action-title')}>
+                <h4 className={cx('genre-action-title')}>
                   Quản lí sản phẩm
                 </h4>
               </span>
               <span
-                className={cx('category-action', {
-                  active: category === 'category',
+                className={cx('genre-action', {
+                  active: genre === 'genre',
                 })}
                 onClick={() => {
-                  setCategory('category');
+                  setGenre('genre');
                 }}
               >
-                <h4 className={cx('category-action-title')}>
+                <h4 className={cx('genre-action-title')}>
                   Quản lí danh mục
                 </h4>
               </span>
             </li>
-            <li className={cx('category-item')}>
-              <h1 className={cx('category-title')}>Người dùng</h1>
+            <li className={cx('genre-item')}>
+              <h1 className={cx('genre-title')}>Người dùng</h1>
               <span
-                className={cx('category-action', {
-                  active: category === 'account',
+                className={cx('genre-action', {
+                  active: genre === 'account',
                 })}
                 onClick={() => {
-                  setCategory('account');
+                  setGenre('account');
                 }}
               >
-                <h4 className={cx('category-action-title')}>
+                <h4 className={cx('genre-action-title')}>
                   Quản lí tài khoản
                 </h4>
               </span>
               <span
-                className={cx('category-action', {
-                  active: category === 'login',
+                className={cx('genre-action', {
+                  active: genre === 'access',
                 })}
                 onClick={() => {
-                  setCategory('login');
+                  setGenre('access');
                 }}
               >
-                <h4 className={cx('category-action-title')}>
+                <h4 className={cx('genre-action-title')}>
                   Thống kê truy cập
                 </h4>
               </span>
             </li>
-            <li className={cx('category-item')}>
-              <h1 className={cx('category-title')}>Doanh số</h1>
+            <li className={cx('genre-item')}>
+              <h1 className={cx('genre-title')}>Doanh số</h1>
               <span
-                className={cx('category-action', {
-                  active: category === 'order',
+                className={cx('genre-action', {
+                  active: genre === 'order',
                 })}
                 onClick={() => {
-                  setCategory('order');
+                  setGenre('order');
                 }}
               >
-                <h4 className={cx('category-action-title')}>
+                <h4 className={cx('genre-action-title')}>
                   Thông tin hóa đơn
                 </h4>
               </span>
               <span
-                className={cx('category-action', {
-                  active: category === 'income',
+                className={cx('genre-action', {
+                  active: genre === 'income',
                 })}
                 onClick={() => {
-                  setCategory('income');
+                  setGenre('income');
                 }}
               >
-                <h4 className={cx('category-action-title')}>
+                <h4 className={cx('genre-action-title')}>
                   Thống kê doanh thu
                 </h4>
               </span>

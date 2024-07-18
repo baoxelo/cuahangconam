@@ -3,12 +3,9 @@
 import * as request from '~/ultil/httpRequest';
 
 export const UpdateUser = async (data) => {
-  const config = {
-    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-  };
   console.log(data);
   try {
-    const res = await request.authPut(`Account/UpdateUser`, data, config);
+    const res = await request.authPut(`Account/UpdateUser`, data);
     return res;
   } catch (error) {
     console.log(error);

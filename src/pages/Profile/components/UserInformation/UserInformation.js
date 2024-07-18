@@ -21,13 +21,13 @@ function UserInformation({ getUserInformation }) {
 
   //Fetch api & get user information
   const getInformation = async () => {
-    if (localStorage.getItem('token')) {
+    if (localStorage.getItem('login')) {
       var user = await GetUserApi.GetUserInformation();
 
       if (user !== undefined) {
         setInformation(user);
       } else {
-        localStorage.removeItem('token');
+        localStorage.removeItem('login');
       }
     }
   };

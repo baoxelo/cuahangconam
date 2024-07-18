@@ -3,15 +3,8 @@
 import * as request from '~/ultil/httpRequest';
 
 export const BanUser = async (email) => {
-  const config = {
-    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-  };
   try {
-    const res = await request.authPut(
-      `AdminAccount/BanUser/${email}`,
-      {},
-      config
-    );
+    const res = await request.authPut(`Admin/BanUser/${email}`, {});
 
     return res.data;
   } catch (error) {

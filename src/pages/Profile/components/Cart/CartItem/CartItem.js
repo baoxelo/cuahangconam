@@ -6,8 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './CartItem.module.scss';
-import * as addProductToCartApi from '~/services/Cart/addProductCart';
-import * as getProductIdApi from '~/services/Products/getProduct';
+import * as addFilmToCartApi from '~/services/Cart/addFilmCart';
+import * as getFilmIdApi from '~/services/Films/getFilm';
 import useDebounce from '~/hooks/useDebounce';
 
 const cx = classNames.bind(styles);
@@ -19,15 +19,17 @@ function CartItem({ data }) {
 
   //Handle when the value in the input change on click button
   const handleChange = async (quantity) => {
-    if (item.quantity > 0) {
+    if (quantityInput > 0) {
       setQuantityInput(parseInt(quantityInput) + quantity);
+    } else {
+      setQuantityInput(0);
     }
   };
 
   //Handle when the value in the input change when typing
   const handleOnChange = (e) => {
     var inputValue = e.target.value;
-    if (inputValue === '') {
+    if (inputValue === '' || inputValue < 0) {
       setQuantityInput(0);
     } else {
       setQuantityInput(inputValue);
@@ -38,10 +40,10 @@ function CartItem({ data }) {
   var debouncedValue = useDebounce(quantityInput, 1000);
 
   useEffect(() => {
-    const fetchAddProductApi = async () => {
+    const fetchAddFilmApi = async () => {
       if (item.quantity !== quantityInput) {
-        const response = await addProductToCartApi.addProductToCart({
-          productId: item.productId,
+        const response = await addFilmToCartApi.addFilmToCart({
+          filmId: item.filmId,
           quantity: quantityInput - item.quantity,
         });
         if (response.status === 202) {
@@ -50,18 +52,18 @@ function CartItem({ data }) {
       }
     };
 
-    fetchAddProductApi();
+    fetchAddFilmApi();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedValue]);
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      var response = await getProductIdApi.getProductId(item.productId);
+    const fetchFilm = async () => {
+      var response = await getFilmIdApi.getFilmId(item.filmId);
       if (response.data) {
         setPrice(response.data.cost);
       }
     };
-    fetchProduct();
+    fetchFilm();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

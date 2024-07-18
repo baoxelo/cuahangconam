@@ -15,16 +15,16 @@
 .sidebar {
   width: calc(100% / 6);
 }
-.category-list {
+.genre-list {
   padding-left: 0;
   list-style-type: none;
   padding-right: 20px;
 }
-.category-item {
+.genre-item {
   margin-bottom: 10px;
   text-align: left;
 }
-.category-title {
+.genre-title {
   color: #fff;
   font-size: 1.8rem;
   font-weight: 600;
@@ -33,7 +33,7 @@
   text-transform: uppercase;
   text-align: left;
 }
-.category-action {
+.genre-action {
   position: relative;
   text-align: left;
   display: inline-block;
@@ -50,7 +50,7 @@
     margin-bottom: 5px;
   }
 }
-.category-action-title {
+.genre-action-title {
   display: inline-block;
   color: #fff;
   font-size: 1.4rem;
@@ -65,4 +65,5 @@
   height: 500px;
   background-color: #fff;
   border-radius: 10px;
+  overflow: hidden;
 }

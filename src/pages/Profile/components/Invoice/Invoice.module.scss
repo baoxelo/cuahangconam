@@ -1,0 +1,28 @@
+/** @format */
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.header {
+  display: flex;
+  flex-direction: row;
+  height: 80px;
+  padding: 0 20px;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+}
+.header-title {
+  width: 20%;
+  font-size: 1.6rem;
+  font-weight: 700;
+  opacity: 0.9;
+  text-align: center;
+  margin-bottom: 0;
+  text-transform: uppercase;
+}
+.container {
+  padding: 10px;
+  max-height: 300px;
+  overflow-y: scroll;
+}

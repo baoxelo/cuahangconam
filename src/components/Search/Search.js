@@ -13,7 +13,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import useDebounce from '~/hooks/useDebounce';
 import * as SearchApi from '~/services/Search/search';
-import ProductItem from '../ProductItem/ProductItem';
+import FilmItem from '../FilmItem/FilmItem';
 
 const cx = classNames.bind(styles);
 
@@ -71,7 +71,7 @@ function Search() {
               <div className={cx('search-result-list')}>
                 {searchResult.map((result, index) => (
                   <div className={cx('search-result-item')}>
-                    <ProductItem key={index} data={result} />
+                    <FilmItem key={index} data={result} />
                   </div>
                 ))}
               </div>

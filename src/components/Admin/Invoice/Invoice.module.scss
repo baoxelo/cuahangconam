@@ -1,0 +1,33 @@
+/** @format */
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.header {
+  display: flex;
+  flex-direction: row;
+  height: 50px;
+  padding: 0 10px;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+}
+.title {
+  width: 20%;
+  padding: 0 10px;
+  font-size: 1.6rem;
+  font-weight: 700;
+  opacity: 0.9;
+  text-align: center;
+  margin-bottom: 0;
+  text-transform: uppercase;
+  &:first-child,
+  &:last-child {
+    width: 10%;
+  }
+}
+.list {
+  padding: 10px;
+  height: 450px;
+  overflow-y: scroll;
+}

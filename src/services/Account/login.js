@@ -7,9 +7,7 @@ export const Login = async (loginData) => {
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
     });
-    if (res.status === 202) {
-      alert('Accept');
-    }
+    return res;
   } catch (error) {
     if (error.response.data.message) {
       alert(error.response.data.message);
